@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Combat rules
   m_EditorClassIdentifier: 
   layers:
-  - mainLayer: Player
+  - mainLayer: Ally
     layersToAttack:
     - Enemy
+  - mainLayer: Enemy
+    layersToAttack:
     - AnotherEnemy

@@ -6,7 +6,6 @@
 
         IHittable CurrentEnemy { get; }
         float DetectRange { get; }
-
         int OwnLayerMask { get; } 
     }
 }

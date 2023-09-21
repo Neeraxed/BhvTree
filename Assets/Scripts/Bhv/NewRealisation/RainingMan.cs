@@ -4,33 +4,33 @@ using Assets.Scripts.Bhv.NewRealisation.Tasks;
 using BehaviourTree;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using System;
 
 namespace Assets.Scripts.Bhv.NewRealisation
 {
-    public class RainingMan : BehaviourTree.Tree, IMovable, IAttack, IDetecting, IHittable
+    public class RainingMan : EnemyBase, IMovable, IAttack, IDetecting, IHittable
     {
-        public RouteBase route;
-        public TMP_Text text;
         public WeaponScriptable weaponScriptable;
+        public LayerCombatRules combatRules;
 
         public int OwnLayerMask => gameObject.layer;
         public int Damage => weaponScriptable.Damage;
-        public float Speed { get; private set; } = 4f;
-        public float DetectRange { get; private set; } = 8f;
+        public float Speed { get; private set; } = 3f;
+        public float DetectRange { get; private set; } = 5f;
         public int ShotTimes { get; private set; }
 
         public Vector3 CurrentPosition => transform.position;
 
         public IHittable CurrentEnemy => currentEnemy;
 
-        public Vector3 TargetPosition => transform.position;
-
-        public float Health { get; private set; }
-
-
+        [SerializeField] private int health;
         private IHittable currentEnemy;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            Health = health;
+        }
         protected override Node SetUpTree()
         {
             Node root = new Selector(new List<Node>()
@@ -125,29 +125,6 @@ namespace Assets.Scripts.Bhv.NewRealisation
         private void LogCurrentState(string message)
         {
             text.UpdateText(message);
-        }
-
-        private void Awake()
-        {
-            Health = 300;
-            text.UpdateText($"Current health: {Health}");
-        }
-
-        private void Die()
-        {
-            Destroy(gameObject);
-        }
-
-        public void TakeHit(int damage)
-        {
-            Health -= damage;
-
-            if (Health <= 0)
-            {
-                Die();
-            }
-
-            text.UpdateText($"Current health: {Health}");
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Assets.Scripts.Bhv.NewRealisation.Conditions
         {
             this.detecting = detecting;
             this.movable = movable;
-            enemyLayerMask = SideChoice.ChooseSide(detecting.OwnLayerMask);
+            enemyLayerMask = SideChoice.ChooseWhomToHit(detecting.OwnLayerMask);
         }
 
         public override NodeState Evaluate()

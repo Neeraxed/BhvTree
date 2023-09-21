@@ -13,6 +13,7 @@ namespace Assets.Scripts.Bhv.NewRealisation
         public RouteBase route;
         public TMP_Text text;
         public WeaponScriptable weaponScriptable;
+        public LayerCombatRules combatRules;
 
         public int Damage => weaponScriptable.Damage;
         public float Speed { get; private set; } = 2f;
@@ -28,6 +29,7 @@ namespace Assets.Scripts.Bhv.NewRealisation
         public float Health { get; private set; }
 
         public Vector3 TargetPosition => transform.position;
+
 
         private IHittable currentEnemy;
 
@@ -158,6 +160,11 @@ namespace Assets.Scripts.Bhv.NewRealisation
             text.UpdateText(message);
         }
 
+        private void Awake()
+        {
+            Health = 500;
+            text.UpdateText($"Current health: {Health}");
+        }
         public void TakeHit(int damage)
         {
             Health -= damage;
@@ -169,6 +176,7 @@ namespace Assets.Scripts.Bhv.NewRealisation
 
             text.UpdateText($"Current health: {Health}");
         }
+
         private void Die()
         {
             Destroy(gameObject);

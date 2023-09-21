@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: Blade
   maxAmmoCapacity: 10
   maxAllowedAttacks: 10
-  damage: 40
+  damage: 10
   attackSpeed: 1
   attackRange: 3
-  reloadTime: 0.01
+  reloadTime: 0.5
